@@ -4,39 +4,82 @@ body{
     margin: 0;
     display : flex;
     flex-direction: column;
+    background: linear-gradient(#caf0f8, #00b4d8);
 }
 #header{
-    border-bottom: #b8d0eb solid 3px;
+    border-bottom: #03045e solid 3px;
     padding: 10px 50px;
     display: flex;
     justify-content: space-between;
     font-size: 30px;
-    background: #b9faf8;
+    background: white;
 }
 
+#logo {
+    background: white;
+    display: flex;
+}
+#logo-img{
+    width: 90px;
+}
+#header-title{
+    color: #0077b6;
+    font-family: "Gloria Hallelujah", cursive;
+    text-decoration: none;
+    font-size: 50px;
+}
+
+#header-nav{
+    display: flex;
+    align-items: center;
+}
 .header-nav-link{
     text-decoration: none;
-    color: #6f2dbd;
+    color: #03045e;
     margin: 0 10px;
 }
 
 .header-nav-link:hover {
-    color: #a663cc; /* Couleur lors du survol */
-    text-decoration: underline; /* Ajoute un soulignement au survol, optionnel */
+    color: #0077b6;
+    text-decoration: underline;
+    margin: 0 10px;
 }
 
 
 #title-introduction{
     text-align: center;
-    color: #a663cc;
+    color: #00b4d8;
 }
 
-#main-title{
-    font-size: 50px;
-    color: #6f2dbd;
+
+   #main-title{
+    font-size: 70px;
+
+    color: #0077b6;
+}
+
+#features{
+    height: 100vh;
 }
 
 #footer{
-    border-top: #b8d0eb solid 3px;
-    background: #b9faf8;
+    border-top: #03045e solid 3px;
+    background: #0077b6;
+    padding: 10px 50px;
+    color: white;
+}
+
+#footer-contact{
+    font-size: 50px;
+    margin: 20px 0;
+}
+#footer-contact-subtext{
+    margin: 0;
+    font-size: 30px;
+}
+
+
+#footer-contact-presentation{
+    font-size: 20px;
+    margin: 20px 0;
 }
