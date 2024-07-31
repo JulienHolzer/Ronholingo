@@ -5,6 +5,7 @@ body{
     display : flex;
     flex-direction: column;
     background: linear-gradient(#caf0f8, #00b4d8);
+    color: #03045e;
 }
 #header{
     border-bottom: #03045e solid 3px;
@@ -49,6 +50,7 @@ body{
 #title-introduction{
     text-align: center;
     color: #00b4d8;
+    font-size: 30px;
 }
 
 
@@ -59,7 +61,36 @@ body{
 }
 
 #features{
-    height: 100vh;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    margin : 50px;
+    justify-content: space-around;
+}
+.features-text{
+    width: 500px;
+    margin: 20px;
+}
+
+#features-1, #features-2, #features-3{
+    display: flex;
+    margin: 50px 0;
+}
+
+
+#features-2 {
+    justify-content: end;
+}
+#features-1-img{
+    width:400px;
+    margin: 0 50px;
+}
+
+#features-2-img, #features-3-img{
+    width: 500px;
+    border: #03045e solid 5px;
+    border-radius: 30px;
+    margin: 0 50px;
 }
 
 #footer{
