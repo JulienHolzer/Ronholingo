@@ -1,6 +1,6 @@
 const fetch = require('node-fetch');
 
-exports.handler = async function(event, context) {
+exports.handler = async function (event, context) {
     const { inputText, targetLanguage } = JSON.parse(event.body);
 
     if (!inputText || !targetLanguage) {
@@ -28,10 +28,15 @@ exports.handler = async function(event, context) {
         });
 
         if (!response.ok) {
-            throw new Error(`Error: ${response.statusText}`);
+            const errorData = await response.json();
+            throw new Error(`Error: ${response.status} - ${errorData.error?.message || response.statusText}`);
         }
 
         const data = await response.json();
+        if (!data.choices || data.choices.length === 0) {
+            throw new Error('Invalid response from API');
+        }
+
         const translation = data.choices[0].message.content.trim();
 
         return {
