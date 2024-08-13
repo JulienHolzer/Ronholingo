@@ -67,9 +67,9 @@ function speak(text, language) {
 */
 
 document.getElementById('translateButton').addEventListener('click', async () => {
-    const inputText = document.getElementById('inputText').value;
+    const inputText = document.getElementById('inputText').value.trim();
     const outputTextArea = document.getElementById('outputText');
-    const targetLanguage = document.getElementById('targetLanguage').value;
+    const targetLanguage = document.getElementById('targetLanguage').value.trim();
 
     if (!inputText.trim()) {
         alert('Please enter some text to translate.');
@@ -77,10 +77,10 @@ document.getElementById('translateButton').addEventListener('click', async () =>
     }
 
     try {
-        const response = await fetch('/.netlify/functions/translate', {
+        const response = await fetch('/.netlify/functions/translate.js', {
             //const response = await fetch('/.Ronholingo/functions/translate.js', {
 
-                method: 'POST',
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
