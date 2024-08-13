@@ -1,0 +1,69 @@
+html, body {
+    height: auto;
+    min-height: 100%; /* Assurer que l'écran est au moins rempli */
+    margin: 0; /* Assurez-vous qu'il n'y a pas de marge par défaut */
+}
+
+body{
+    font-family: sans-serif;
+    margin: 0;
+    display : flex;
+    flex-direction: column;
+    background: linear-gradient(#caf0f8, #00b4d8);
+    color: #03045e;
+    height: 100%;
+}
+#header{
+    border-bottom: #03045e solid 3px;
+    padding: 10px 50px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 30px;
+    background: white;
+}
+
+#logo {
+    background: white;
+    display: flex;
+}
+#logo-img{
+    width: 90px;
+}
+#header-title{
+    color: #0077b6;
+    font-family: "Gloria Hallelujah", cursive;
+    text-decoration: none;
+    font-size: 50px;
+}
+
+#header-nav{
+    display: flex;
+    align-items: center;
+}
+.header-nav-link{
+    text-decoration: none;
+    color: #03045e;
+    margin: 0 10px;
+}
+
+.header-nav-link:hover {
+    color: #0077b6;
+    text-decoration: underline;
+    margin: 0 10px;
+}
+
+
+#title-introduction{
+    text-align: center;
+    color: #0077b6;
+    font-size: 30px;
+}
+
+
+#main-title{
+    font-size: 100px;
+    font-weight: 700; /* Utilisez un poids élevé pour un impact plus fort */
+    color: #03045e;
+}
+
+

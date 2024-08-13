@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>flashcard</title>
+        <link rel="stylesheet" href="../css/styles.css">
+        <link rel="stylesheet" href="../css/flashcard.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Happy+Monkey&family=Orbitron:wght@400..900&display=swap" rel="stylesheet">
+    </head>
+    <body>
+    <div id="header">
+        <div id="logo">
+            <img id="logo-img" src="../images/giphy.webp">
+            <a href="index.html" id="header-title">Ronholingo</a>
+        </div>
+        <div id="header-nav">
+            <a class="header-nav-link" href="index.html">Home</a>
+            <a class="header-nav-link" href="words-list.html">Words-list</a>
+            <a class="header-nav-link" href="flashcard.html">Flashcard</a>
+            <a class="header-nav-link" href="matching-game.html">Matching game</a>
+            <a class="header-nav-link" href="memory.html">Memory</a>
+            <a class="header-nav-link" href="translate.html">Translate</a>
+        </div>
+    </div>
+    <div id="title-introduction">
+        <h1 id="main-title">Flashcard</h1>
+    </div>
+    <div class="container">
+        <h1>Flashcards de Vocabulaire</h1>
+        <div id="score">Cartes Connues : 0/0</div>
+        <div class="language-selectors">
+            <label for="sourceLanguage">Langue Source:</label>
+            <select id="sourceLanguage" class="styled-select">
+                <option value="english" selected>English</option>
+                <option value="french">French</option>
+                <option value="spanish">Spanish</option>
+                <option value="japanese">Japanese</option>
+            </select>
+            <label for="targetLanguage">Langue Cible:</label>
+            <select id="targetLanguage" class="styled-select">
+                <option value="english">English</option>
+                <option value="french" selected>French</option>
+                <option value="spanish">Spanish</option>
+                <option value="japanese">Japanese</option>
+            </select>
+        </div>
+        <div id="flashcard" class="flashcard">
+            <div class="front" id="front-text">Mot</div>
+            <div class="back" id="back-text">Traduction</div>
+        </div>
+        <div class="buttons">
+            <button id="studyAgainButton">Étudier encore</button>
+            <button id="knowButton">Je connais le mot</button>
+        </div>
+    </div>
+    </body>
+    <script src="../scripts/firebase-config.js" type="module"></script>
+    <script src="../scripts/flashcard.js" type="module"></script>
+</html>

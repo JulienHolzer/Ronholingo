@@ -1,0 +1,100 @@
+#words-list {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.word-pair {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 5px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* Aligner les mots verticalement */
+    flex-wrap: wrap; /* Permet de faire apparaître la définition sous les mots */
+}
+
+.word-pair strong {
+    color: #555;
+    margin-right: 10px; /* Ajouter un espace entre les mots */
+}
+
+.definition {
+    background-color: #f0f0f0;
+    padding: 8px;
+    margin-top: 10px;
+    border-radius: 4px;
+    width: 100%; /* Prendre toute la largeur du parent */
+    display: none; /* Cacher la définition par défaut */
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 10px; /* Espacement entre l'image et le texte */
+
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    max-height: 0; /* Initially hidden */
+}
+
+
+.definition img {
+    max-width: 120px; /* Ajuster la taille de l'image */
+    max-height: 120px;
+    border-radius: 4px;
+}
+
+.word {
+    cursor: pointer;
+    transition: color 0.3s ease;
+    margin-bottom: 5px; /* Add space between the word and the definition */
+}
+
+.word:hover {
+    color: #007bff; /* Changer de couleur au survol pour un meilleur retour visuel */
+}
+
+.sound-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+/* Style pour les sélecteurs de langue */
+.language-selectors {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+}
+
+.styled-select {
+    width: 150px;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3csvg xmlns%3d%27http://www.w3.org/2000/svg%27 viewBox%3d%270 0 4 5%27%3e%3cpath fill%3d%27%23000%27 d%3d%27M2 0L0 2h4zM2 5L0 3h4z%27/%3e%3c/svg%3e');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 8px 10px;
+    cursor: pointer;
+}
+
+.styled-select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.styled-select:hover {
+    border-color: #007bff;
+}

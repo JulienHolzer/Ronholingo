@@ -1,0 +1,68 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding: 0 80px; /* Ajout de marge à gauche et à droite */
+}
+
+.input-section, .output-section {
+    width: 45%;
+    display: flex;
+    flex-direction: column;
+}
+
+textarea {
+    height: 150px;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 1em;
+    border: none;
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 150px; /* Taille normale pour le bouton */
+    align-self: center; /* Centré dans le conteneur */
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+.audio-icon {
+    width: 30px; /* Taille plus grande pour le bouton audio */
+    height: 30px;
+    cursor: pointer;
+    margin-left: 10px;
+    border-radius: 50%; /* Rendre le bouton arrondi */
+    background-color: #f0f0f0; /* Ajouter un fond pour améliorer l'apparence */
+    padding: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Ajouter une ombre pour l'effet 3D */
+    transition: background-color 0.3s ease; /* Transition pour le changement de couleur */
+}
+
+.audio-icon:hover {
+    background-color: #e0e0e0; /* Couleur légèrement différente au survol */
+}
+
+.language-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.styled-select {
+    width: 80%; /* Taille ajustée */
+    padding: 8px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
