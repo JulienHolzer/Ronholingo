@@ -82,7 +82,8 @@ document.getElementById('translateButton').addEventListener('click', async () =>
 
                 method: 'POST',
             headers: {
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${apiKey}`
             },
             body: JSON.stringify({
                 inputText,
