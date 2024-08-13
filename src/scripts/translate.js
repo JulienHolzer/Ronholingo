@@ -82,8 +82,7 @@ document.getElementById('translateButton').addEventListener('click', async () =>
 
                 method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${process.env.OPEN_AI_KEY}`
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 inputText,
