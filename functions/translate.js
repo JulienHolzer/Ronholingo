@@ -1,5 +1,7 @@
 const fetch = require('node-fetch');
 
+console.log('API Key:', process.env.OPEN_AI_KEY);
+
 exports.handler = async function (event, context) {
     const { inputText, targetLanguage } = JSON.parse(event.body);
 
