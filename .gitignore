@@ -1,2 +1,10 @@
 # Fichiers de système
 .DS_Store
+
+# Fichier de configuration de l'IDE
+.idea/
+
+# node_modules
+node_modules/
+
+package-lock.json
