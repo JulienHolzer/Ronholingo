@@ -1,11 +1,12 @@
 .game-container {
     text-align: center;
-    max-width: 600px;
+    max-width: 700px;
     margin: 0 auto;
     padding: 20px;
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 200px;
 }
 
 .game-container h1 {
@@ -16,10 +17,11 @@
 .game-container #score {
     font-size: 1.2em;
     margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .game-container .word {
-    font-size: 1.5em;
+    font-size: 70px;
     margin-bottom: 20px;
 }
 
@@ -28,6 +30,7 @@
     grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     margin-bottom: 20px;
+    border-radius: 4px;
 }
 
 .game-container img {
@@ -43,6 +46,47 @@
 }
 
 .game-container .message {
-    font-size: 1.2em;
+    font-size: 70px;
+    color: green;
+    margin-bottom: 20px;
+}
+
+.styled-select {
+    width: 150px;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3csvg xmlns%3d%27http://www.w3.org/2000/svg%27 viewBox%3d%270 0 4 5%27%3e%3cpath fill%3d%27%23000%27 d%3d%27M2 0L0 2h4zM2 5L0 3h4z%27/%3e%3c/svg%3e');
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 8px 10px;
+    cursor: pointer;
+}
+
+.styled-select:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.styled-select:hover {
+    border-color: #007bff;
+}
+
+.language-selectors {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+}
+
+.red-text {
     color: red;
 }

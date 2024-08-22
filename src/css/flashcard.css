@@ -1,5 +1,6 @@
 .container {
     text-align: center;
+    margin-bottom: 200px;
 }
 
 #score {
@@ -47,14 +48,13 @@
 
 .back {
     transform: rotateY(180deg);
-    background-color: blueviolet;
+    background-color: seagreen;
     color: white;
 }
 
 .buttons button {
     font-size: 30px;
-    margin: 5px;
-    margin-bottom: 100px;
+    margin: 20px;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
@@ -146,3 +146,39 @@
     z-index: -1; /* Pour le mettre derrière les autres cartes */
 }
 
+
+#hintButton {
+    background-color: #d9912b;
+    color: #fff;
+    font-size: 30px;
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#hintButton:hover {
+    background-color: #966115;
+}
+
+#hintContainer {
+    margin-top: 20px;
+    min-height: 50px;
+    text-align: center;
+}
+
+.hint-text {
+    font-size: 24px;
+    color: #007bff;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    transform: translateY(10px);
+    margin-top: 10px;
+}
+
+.hint-text.show {
+    opacity: 1;
+    transform: translateY(0);
+}
