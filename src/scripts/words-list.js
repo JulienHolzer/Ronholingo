@@ -117,7 +117,7 @@ function displayWords(words) {
 }
 
 
-function toggleDefinition(word, wordPair, language) {
+async function toggleDefinition(word, wordPair, language) {
     // Vérifie si la définition existe déjà
     let definitionEl = wordPair.querySelector('.definition');
 
@@ -137,6 +137,10 @@ function toggleDefinition(word, wordPair, language) {
         definitionEl = document.createElement('div');
         definitionEl.classList.add('definition');
 
+        // Récupérer la définition via la fonction Netlify
+        const definition = await getDefinition(word[language], language);
+
+
         // Image
         const imgElement = document.createElement('img');
         imgElement.src = word.imgURL;
@@ -144,7 +148,8 @@ function toggleDefinition(word, wordPair, language) {
 
         // Texte
         const textElement = document.createElement('div');
-        textElement.textContent = `Définition et exemple en ${language}: Exsistit autem hoc loco quaedam quaestio subdifficilis...`;
+        //textElement.textContent = `Définition et exemple en ${language}: Exsistit autem hoc loco quaedam quaestio subdifficilis...`;
+        textElement.textContent = definition;
 
         // Ajoute l'image et le texte à l'élément de définition
         definitionEl.appendChild(imgElement);
@@ -250,5 +255,34 @@ console.log("in the addWord function")
         document.getElementById("urlInput").value = "";
     } else {
         alert("Please fill in all the input fields");
+    }
+}
+
+// Add event
+
+async function getDefinition(word, language) {
+    // Use a netlify function to get the definition from the API
+
+    try {
+        const response = await fetch('/.netlify/functions/definition', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                word,
+                targetLanguage: language
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return data.definition;
+    } catch (error) {
+        console.error('Error:', error);
+        return 'Definition not found';
     }
 }

@@ -1,9 +1,9 @@
 import fetch from 'node-fetch';
 
 exports.handler = async function (event, context) {
-    const { inputText, targetLanguage } = JSON.parse(event.body);
+    const { word, targetLanguage } = JSON.parse(event.body);
 
-    if (!inputText || !targetLanguage) {
+    if (!word || !targetLanguage) {
         return {
             statusCode: 400,
             body: JSON.stringify({ error: 'Invalid input' }),
@@ -11,6 +11,7 @@ exports.handler = async function (event, context) {
     }
 
     try {
+        console.log('API Key:', process.env.OPEN_AI_KEY);
 
         const response = await fetch('https://api.openai.com/v1/chat/completions', {
             method: 'POST',
@@ -21,8 +22,8 @@ exports.handler = async function (event, context) {
             body: JSON.stringify({
                 model: "gpt-4o-mini",
                 messages: [
-                    { role: "system", content: "You are a translation assistant." },
-                    { role: "user", content: `Translate the following text to ${targetLanguage} (only the translation, nothing else): ${inputText}` }
+                    { role: "system", content: "You are a dictionary." },
+                    { role: "user", content: `Give me the definition and an example of  ${word} in the following language ${targetLanguage}` }
                 ],
                 max_tokens: 150
             })
@@ -38,11 +39,11 @@ exports.handler = async function (event, context) {
             throw new Error('Invalid response from API');
         }
 
-        const translation = data.choices[0].message.content.trim();
+        const definition = data.choices[0].message.content.trim();
 
         return {
             statusCode: 200,
-            body: JSON.stringify({ translation }),
+            body: JSON.stringify({ definition }),
         };
 
     } catch (error) {

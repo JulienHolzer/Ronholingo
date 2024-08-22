@@ -20,6 +20,7 @@
     "webpack-cli": "^5.1.4"
   },
   "dependencies": {
+    "netlify-cli": "^17.34.2",
     "node-fetch": "^3.3.2",
     "webpack": "^5.93.0"
   }
