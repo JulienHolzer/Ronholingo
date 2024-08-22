@@ -11,18 +11,31 @@ const knowButton = document.getElementById('knowButton');
 const studyAgainButton = document.getElementById('studyAgainButton');
 const sourceLanguageSelect = document.getElementById('sourceLanguage');
 const targetLanguageSelect = document.getElementById('targetLanguage');
+const categoryEl = document.getElementById('category');  // New category selector
+const hintButton = document.getElementById('hintButton');
+const hintText = document.getElementById('hintText');
+
+let selectedCategory = 'animals';  // Default category
+
+
 
 // Get the words from the database and display them
 let wordsInDB = [];
+let filteredWords = [];
 onValue(wordsRef, function(snapshot){
     if (snapshot.exists()) {
         wordsInDB = Object.entries(snapshot.val())
-        updateFlashcard(wordsInDB)
+
+        filteredWords = wordsInDB.filter(word => word[1].category === selectedCategory || selectedCategory === 'allCategories');
+
+        updateFlashcard(filteredWords)
     }
     else{
         console.log("No words found...");
     }
 })
+
+
 
 // Variables for the flashcard
 let currentWordIndex = 0;
@@ -30,9 +43,12 @@ let knownWordsCount = 0;
 
 
 // Update the flashcard with the next word
-function updateFlashcard(wordsList) {
-    if (currentWordIndex < wordsList.length) {
-        const currentWord = wordsList[currentWordIndex][1];
+function updateFlashcard(words) {
+
+    //const filteredWords = words.filter(word => word[1].category === selectedCategory);
+
+    if (currentWordIndex < filteredWords.length) {
+        const currentWord = filteredWords[currentWordIndex][1];
         const sourceLanguage = sourceLanguageSelect.value;
         const targetLanguage = targetLanguageSelect.value;
 
@@ -66,13 +82,13 @@ function updateFlashcard(wordsList) {
             backText.style.transition = '';
         }
 
-        scoreText.textContent = `Cartes Connues : ${knownWordsCount}/${wordsList.length}`;
+        scoreText.textContent = `Known cards: ${knownWordsCount}/${filteredWords.length}`;
 
         // Réinitialiser l'état de la carte à la face avant sans animation de retournement
         flashcard.classList.remove('flip', 'fly-away', 'move-back');
     } else {
         flashcard.style.display = 'none';
-        scoreText.textContent = `Terminé ! Score final : ${knownWordsCount}/${wordsList.length}`;
+        scoreText.textContent = `Finished, well done! Final score: ${knownWordsCount}/${filteredWords.length}`;
     }
 }
 
@@ -86,33 +102,63 @@ flashcard.addEventListener('click', () => {
 
 // Gestion du bouton "Je connais le mot"
 knowButton.addEventListener('click', () => {
-    if (currentWordIndex < wordsInDB.length) {
+    if (currentWordIndex < filteredWords.length) {
         flashcard.classList.add('fly-away');
         setTimeout(() => {
             knownWordsCount++;
             currentWordIndex++;
-            updateFlashcard(wordsInDB);
+            updateFlashcard(filteredWords);
         }, 600); // Attendre que l'animation se termine
     }
+    hintText.classList.remove('show');
 });
 
 // Gestion du bouton "Étudier encore"
 studyAgainButton.addEventListener('click', () => {
-    if (currentWordIndex < wordsInDB.length) {
+    if (currentWordIndex < filteredWords.length) {
         // Déplacer la carte actuelle à la fin de la liste
-        const currentWord = wordsInDB.splice(currentWordIndex, 1)[0];
-        wordsInDB.push(currentWord);
+        const currentWord = filteredWords.splice(currentWordIndex, 1)[0];
+        filteredWords.push(currentWord);
         flashcard.classList.add('move-back');
         setTimeout(() => {
-            updateFlashcard(wordsInDB);
+            updateFlashcard(filteredWords);
         }, 600); // Attendre que l'animation se termine
     }
+    hintText.classList.remove('show');
 });
 
 
 // Update the flashcard when the language changes
 [sourceLanguageSelect, targetLanguageSelect].forEach(select => {
     select.addEventListener('change', () => {
-        updateFlashcard(wordsInDB);
+        updateFlashcard(filteredWords);
     });
+});
+
+// Listen for changes in the selected category
+categoryEl.addEventListener('change', function(){
+    selectedCategory = categoryEl.value;
+    filteredWords = wordsInDB.filter(word => word[1].category === selectedCategory || selectedCategory === 'allCategories');
+
+    updateFlashcard(filteredWords);
+});
+
+
+
+hintButton.addEventListener('click', () => {
+    const currentWord = filteredWords[currentWordIndex][1];
+    const sourceLanguage = sourceLanguageSelect.value;
+
+    // Mettre à jour le texte d'indice
+    hintText.textContent = `Voici un indice pour le mot "${currentWord[sourceLanguage]}
+    dsfsdfasfasdhfashdfhkashkfhkjadsf uhsdailufhiushdfiuhsiudhfashfiahdfkahsdkjfhasdkljfhkdsjhfhsdkjhgjksdhhfkjhdskjfhakjhfkjsahlkfa shllkfhjdfdgfgékfgjdflgjldfjglkjfdklgjlkfjdsglkjfd lksjglkjfdslgkjlkdsfjglkjfdlskjglkjfdsljglkfjdslkgjlfksjlgkjdflkgjlkdfjglkjflkgjdlskfjglkfdjslkgjldkjglkjfldksgjlkfjglkjfdklg jserégjfséldkfjgsélkjfsgsédlf kgjdélkjdfsgélkjdsfglkjsdf glkéjfdsglékjfdgljsdlkgjfdgkljdslgjkfljkdflkjgfdlkjgdsl
+    "`;
+
+    // Ajouter la classe pour l'animation
+    hintText.classList.add('show');
+
+    // Supprimer la classe après un délai pour réinitialiser l'animation lors du prochain clic
+    setTimeout(() => {
+        hintText.classList.remove('show');
+    }, 5000); // Garder l'indice visible pendant 5 secondes
 });

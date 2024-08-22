@@ -20,7 +20,7 @@
             <a class="header-nav-link" href="../index.html">Home</a>
             <a class="header-nav-link" href="words-list.html">Words-list</a>
             <a class="header-nav-link" href="flashcard.html">Flashcard</a>
-            <a class="header-nav-link" href="matching-game.html">Matching game</a>
+            <a class="header-nav-link" href="matching-game.html">Matching-game</a>
             <a class="header-nav-link" href="memory.html">Memory</a>
             <a class="header-nav-link" href="translate.html">Translate</a>
         </div>
@@ -29,26 +29,65 @@
         <h1 id="main-title">Words-list</h1>
     </div>
     <div class="language-selectors">
-        <label for="sourceLanguage">Langue Source:</label>
+        <label for="sourceLanguage">Source Language:</label>
         <select id="sourceLanguage" class="styled-select">
             <option value="english" selected>English</option>
             <option value="french">French</option>
-            <option value="spanish">Spanish</option>
+            <option value="german">German</option>
+            <option value="italian">Italian</option>
             <option value="japanese">Japanese</option>
+            <option value="spanish">Spanish</option>
+            <option value="vietnamese">Vietnamese</option>
         </select>
-        <label for="targetLanguage">Langue Cible:</label>
+        <label for="targetLanguage">Target Language:</label>
         <select id="targetLanguage" class="styled-select">
             <option value="english">English</option>
             <option value="french" selected>French</option>
-            <option value="spanish">Spanish</option>
+            <option value="german">German</option>
+            <option value="italian">Italian</option>
             <option value="japanese">Japanese</option>
+            <option value="spanish">Spanish</option>
+            <option value="vietnamese">Vietnamese</option>
+        </select>
+        <label for="category">Category:</label>
+        <select id="category" class="styled-select">
+            <option value="allCategories">All categories</option>
+            <option value="animals" selected>Animals</option>
+            <option value="body">Body</option>
+            <option value="clothes">Clothes</option>
+            <option value="fruits">Fruits</option>
+            <option value="greetings">Greetings</option>
+            <option value="house">House</option>
+            <option value="vegetables">Vegetables</option>
+            <option value="vehicles">Vehicles</option>
+            <option value="myWords">My Words</option>
         </select>
     </div>
     <div id="main">
         <ul id="words-list">
         </ul>
+        <div id="inputContainer" class="input-container">
+            <h2>Add a new word in your personalized words-list!</h2>
+            <div id="inputContainerWithoutTitle">
+                <label for="languageInput">Language of the new word:</label>
+                <select id="languageInput" class="styled-select">
+                    <option value="english">Anglais</option>
+                    <option value="french">Français</option>
+                    <option value="spanish">Espagnol</option>
+                    <option value="german">Allemand</option>
+                    <option value="italian">Italien</option>
+                    <option value="vietnamese">Vietnamien</option>
+                    <option value="japanese">Japonais</option>
+                </select>
+                <input type="text" id="wordInput" class="input-field" placeholder="Enter word" />
+                <input type="text" id="urlInput" class="input-field" placeholder="Enter image URL" />
+                <button id="addButton" class="button">Add Word</button>
+            </div>
+        </div>
+
     </div>
     </body>
     <script src="../scripts/firebase-config.js" type="module"></script>
+    <script src="../scripts/main.js" type="module"></script>
     <script src="../scripts/words-list.js" type="module"></script>
 </html>

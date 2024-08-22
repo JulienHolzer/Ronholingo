@@ -20,7 +20,7 @@
             <a class="header-nav-link" href="../index.html">Home</a>
             <a class="header-nav-link" href="words-list.html">Words-list</a>
             <a class="header-nav-link" href="flashcard.html">Flashcard</a>
-            <a class="header-nav-link" href="matching-game.html">Matching game</a>
+            <a class="header-nav-link" href="matching-game.html">Matching-game</a>
             <a class="header-nav-link" href="memory.html">Memory</a>
             <a class="header-nav-link" href="translate.html">Translate</a>
         </div>
@@ -29,19 +29,35 @@
         <h1 id="main-title">Matching-game</h1>
     </div>
     <div class="game-container">
-        <h1>Jeu de Vocabulaire</h1>
-        <div>
-            <label for="language-select">Choisir la langue :</label>
-            <select id="language-select">
-                <option value="english">English</option>
-                <option value="french">Français</option>
-                <option value="spanish">Español</option>
+        <h1>Find the image matching the word!</h1>
+        <div class="language-selectors">
+            <label for="language-select">Choose the language:</label>
+            <select id="language-select" class="styled-select">
+                <option value="english" selected>English</option>
+                <option value="french">French</option>
+                <option value="german">German</option>
+                <option value="italian">Italian</option>
+                <option value="japanese">Japanese</option>
+                <option value="spanish">Spanish</option>
+                <option value="vietnamese">Vietnamese</option>
+            </select>
+            <label for="category">Category:</label>
+            <select id="category" class="styled-select">
+                <option value="allCategories">All categories</option>
+                <option value="animals" selected>Animals</option>
+                <option value="body">Body</option>
+                <option value="clothes">Clothes</option>
+                <option value="fruits">Fruits</option>
+                <option value="greetings">Greetings</option>
+                <option value="house">House</option>
+                <option value="vegetables">Vegetables</option>
+                <option value="vehicles">Vehicles</option>
             </select>
         </div>
         <div id="score">Score : 0</div>
         <div id="word" class="word"></div>
-        <div id="images" class="images"></div>
         <div id="message" class="message"></div>
+        <div id="images" class="images"></div>
     </div>
     </body>
     <script src="../scripts/firebase-config.js" type="module"></script>

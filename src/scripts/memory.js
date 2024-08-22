@@ -10,33 +10,43 @@ let selectedLanguage2 = 'french';
 let flippedCards = [];
 let matchedPairs = 0;
 
+let selectedCategory = 'animals';  // Default category
+
+
 // Références aux éléments HTML
 const lang1Select = document.getElementById('lang1-select');
 const lang2Select = document.getElementById('lang2-select');
 const startGameButton = document.getElementById('start-game');
 const gameBoard = document.getElementById('game-board');
 const messageElement = document.getElementById('message');
+const categoryEl = document.getElementById('category');  // New category selector
+
 
 // Écouter les modifications de la sélection des langues
 lang1Select.addEventListener('change', (e) => {
     selectedLanguage1 = e.target.value;
     console.log(selectedLanguage1);
+    startGame()
 });
 
 lang2Select.addEventListener('change', (e) => {
     selectedLanguage2 = e.target.value;
     console.log(selectedLanguage2);
+    startGame()
 });
 
-// Démarrer le jeu lorsque l'utilisateur clique sur le bouton "Démarrer le Jeu"
-startGameButton.addEventListener('click', () => {
-    startGame();
+// Listen for changes in the selected category
+categoryEl.addEventListener('change', function(){
+    selectedCategory = categoryEl.value;
+    startGame()
 });
+
 
 
 onValue(wordsInDB, function(snapshot){
     if (snapshot.exists()) {
         wordsList = Object.entries(snapshot.val())
+        startGame()
     }
     else{
         messageElement.textContent = "No words found...";
@@ -57,7 +67,11 @@ function startGame() {
 
 // Créer le plateau de jeu
 function createBoard() {
-    const selectedPairs = wordsList.slice(0, 8); // Sélectionner 8 paires de mots
+
+    // Filter words based on selected category
+    const filteredWords = wordsList.filter(word => word[1].category === selectedCategory || selectedCategory === "allCategories");
+
+    const selectedPairs = filteredWords.slice(0, 8); // Sélectionner 8 paires de mots
     const cardsArray = [];
 
     selectedPairs.forEach(word => {
@@ -118,7 +132,7 @@ function checkForMatch() {
         card2.style.visibility = 'hidden';
         matchedPairs++;
         if (matchedPairs === 8) {
-            messageElement.textContent = 'Félicitations ! Vous avez trouvé toutes les paires.';
+            messageElement.textContent = 'Congratulations, you found all the pairs!';
         }
     } else {
         card1.classList.remove('flip');
