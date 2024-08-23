@@ -1,5 +1,6 @@
-import { wordsRef } from "./firebase-config.js";
+import {wordsRef} from "./firebase-config.js";
 import {onValue} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js"
+//import fetch from "node-fetch";
 
 
 // HTML elements
@@ -145,14 +146,13 @@ categoryEl.addEventListener('change', function(){
 
 
 
-hintButton.addEventListener('click', () => {
+ hintButton.addEventListener('click', async () => {
     const currentWord = filteredWords[currentWordIndex][1];
     const sourceLanguage = sourceLanguageSelect.value;
+    const targetLanguage = targetLanguageSelect.value;
 
     // Mettre à jour le texte d'indice
-    hintText.textContent = `Voici un indice pour le mot "${currentWord[sourceLanguage]}
-    dsfsdfasfasdhfashdfhkashkfhkjadsf uhsdailufhiushdfiuhsiudhfashfiahdfkahsdkjfhasdkljfhkdsjhfhsdkjhgjksdhhfkjhdskjfhakjhfkjsahlkfa shllkfhjdfdgfgékfgjdflgjldfjglkjfdklgjlkfjdsglkjfd lksjglkjfdslgkjlkdsfjglkjfdlskjglkjfdsljglkfjdslkgjlfksjlgkjdflkgjlkdfjglkjflkgjdlskfjglkfdjslkgjldkjglkjfldksgjlkfjglkjfdklg jserégjfséldkfjgsélkjfsgsédlf kgjdélkjdfsgélkjdsfglkjsdf glkéjfdsglékjfdgljsdlkgjfdgkljdslgjkfljkdflkjgfdlkjgdsl
-    "`;
+    hintText.textContent = await getHint(currentWord[sourceLanguage], targetLanguage);
 
     // Ajouter la classe pour l'animation
     hintText.classList.add('show');
@@ -160,5 +160,32 @@ hintButton.addEventListener('click', () => {
     // Supprimer la classe après un délai pour réinitialiser l'animation lors du prochain clic
     setTimeout(() => {
         hintText.classList.remove('show');
-    }, 5000); // Garder l'indice visible pendant 5 secondes
+    }, 20000); // Garder l'indice visible pendant 5 secondes
 });
+
+async function getHint(word, language) {
+    // Use a netlify function to get the definition from the API
+
+    try {
+        const response = await fetch('/.netlify/functions/hint', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                word,
+                targetLanguage: language
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return data.hint;
+    } catch (error) {
+        console.error('Error:', error);
+        return 'Hint not found';
+    }
+}
