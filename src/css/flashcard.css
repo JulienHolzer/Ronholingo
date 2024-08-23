@@ -171,7 +171,7 @@
 
 .hint-text {
     font-size: 24px;
-    color: #007bff;
+    color: #0304045e;
     opacity: 0;
     transition: opacity 0.5s ease, transform 0.5s ease;
     transform: translateY(10px);

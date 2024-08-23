@@ -23,7 +23,7 @@ exports.handler = async function (event, context) {
                 model: "gpt-4o-mini",
                 messages: [
                     { role: "system", content: "You are a flashcard game." },
-                    { role: "user", content: `Give me the hints for this word :  ${word} in the following language ${targetLanguage}, do not forget that I am playing a flashcard game` }
+                    { role: "user", content: `Give me one hint for this word : ${word} in the following language ${targetLanguage}, do not forget that I am playing a flashcard game` }
                 ],
                 max_tokens: 200
             })
