@@ -109,7 +109,7 @@ knowButton.addEventListener('click', () => {
             knownWordsCount++;
             currentWordIndex++;
             updateFlashcard(filteredWords);
-        }, 600); // Attendre que l'animation se termine
+        }, 2000); // Attendre que l'animation se termine
     }
     hintText.classList.remove('show');
 });
@@ -123,7 +123,7 @@ studyAgainButton.addEventListener('click', () => {
         flashcard.classList.add('move-back');
         setTimeout(() => {
             updateFlashcard(filteredWords);
-        }, 600); // Attendre que l'animation se termine
+        }, 2000); // Attendre que l'animation se termine
     }
     hintText.classList.remove('show');
 });
