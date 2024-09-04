@@ -109,7 +109,7 @@ knowButton.addEventListener('click', () => {
             knownWordsCount++;
             currentWordIndex++;
             updateFlashcard(filteredWords);
-        }, 2000); // Attendre que l'animation se termine
+        }, 600); // Attendre que l'animation se termine
     }
     hintText.classList.remove('show');
 });
@@ -123,7 +123,7 @@ studyAgainButton.addEventListener('click', () => {
         flashcard.classList.add('move-back');
         setTimeout(() => {
             updateFlashcard(filteredWords);
-        }, 2000); // Attendre que l'animation se termine
+        }, 600); // Attendre que l'animation se termine
     }
     hintText.classList.remove('show');
 });
@@ -160,7 +160,7 @@ categoryEl.addEventListener('change', function(){
     // Supprimer la classe après un délai pour réinitialiser l'animation lors du prochain clic
     setTimeout(() => {
         hintText.classList.remove('show');
-    }, 20000); // Garder l'indice visible pendant 5 secondes
+    }, 20000); // Garder l'indice visible pendant 20 secondes
 });
 
 async function getHint(word, language, category) {
