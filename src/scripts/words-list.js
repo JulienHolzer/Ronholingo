@@ -210,41 +210,65 @@ categoryEl.addEventListener('change', function(){
 //ajout des mots personnalisés:
 
 // Simulation de l'appel API pour obtenir les traductions dans les autres langues
-function getTranslations(word, language) {
-    // Remplacez par l'appel à l'API OpenAI dans la version finale
-    return {
-        french: word + "Fr",
-        english: word + "En",
-        spanish: word + "Sp",
-        vietnamese: word + "Vn",
-        japanese: word + "Jp",
-        german: word + "Gr",
-        italian: word + "It"
-    };
+async function getTranslations(word, lang) {
+    // Use a netlify function to get the definition from the API
+
+    try {
+        const response = await fetch('/.netlify/functions/getTranslationsJson', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                word,
+                lang
+            })
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error: ${response.statusText}`);
+        }
+
+        const data = await response.json();
+        return data.translationsJSON;
+    } catch (error) {
+        console.error('Error:', error);
+        return 'Definition not found';
+    }
 }
 
 addWordBtn.addEventListener("click", addWord);
 
 // Fonction pour ajouter un mot
-function addWord() {
+async function addWord() {
     const language = document.getElementById("languageInput").value.trim();
     const word = document.getElementById("wordInput").value.trim();
     const imgUrl = document.getElementById("urlInput").value.trim();
     const category = categoryEl.value;
-console.log("in the addWord function")
+    console.log("in the addWord function")
     if (language && word && imgUrl && category === "myWords") {
-        // Simuler l'obtention des traductions
-        const translations = getTranslations(word, language);
+        // Obtenir les traductions dans les autres langues et transformer le texte en JSON
+        const translations = await getTranslations(word, language);
+        let translationsText = translations.replace(/```json|```/g, '').trim();
+
+        // Parser le texte décodé en JSON valide
+        let translationsJSON;
+        try {
+            translationsJSON = JSON.parse(translationsText);
+        } catch (parseError) {
+            throw new Error('Failed to parse JSON response: ' + parseError.message);
+        }
+
 
         // Appeler la fonction pour ajouter les mots à la base de données
         addWordsToDatabaseWithCheck(
-            translations.french,
-            translations.english,
-            translations.spanish,
-            translations.vietnamese,
-            translations.japanese,
-            translations.german,
-            translations.italian,
+            translationsJSON.english,
+            translationsJSON.french,
+            translationsJSON.spanish,
+            translationsJSON.vietnamese,
+            translationsJSON.japanese,
+            translationsJSON.german,
+            translationsJSON.italian,
             imgUrl,
             category
         );
