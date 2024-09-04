@@ -1,6 +1,7 @@
 import {wordsRef } from "./firebase-config.js";
 import {onValue} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js"
 import {addWordsToDatabaseWithCheck} from "./main.js";
+//import { marked } from 'marked';  // Importer la fonction `marked` pour convertir le Markdown en HTML
 
 
 // Languages selected by default
@@ -68,7 +69,7 @@ function speak(word, language) {
 }
 
 // Display the words in the "words-list" section
-function displayWords(words) {
+async function displayWords(words) {
     wordsListEl.innerHTML = '';
 
     // Filter words based on selected category
@@ -82,17 +83,18 @@ function displayWords(words) {
 
         const lang1Word = filteredWords[i][1][language1El.value];
         const lang2Word = filteredWords[i][1][language2El.value];
+        const category = document.getElementById('category').value;
 
         // Create word elements with click event to toggle definitions
         const lang1WordEl = document.createElement('span');
         lang1WordEl.textContent = lang1Word;
         lang1WordEl.classList.add('word');
-        lang1WordEl.addEventListener('click', () => toggleDefinition(filteredWords[i][1], wordPair, selectedLanguage1));
+        lang1WordEl.addEventListener('click', async () => toggleDefinition(filteredWords[i][1], wordPair, selectedLanguage1, category));
 
         const lang2WordEl = document.createElement('span');
         lang2WordEl.textContent = lang2Word;
         lang2WordEl.classList.add('word');
-        lang2WordEl.addEventListener('click', () => toggleDefinition(filteredWords[i][1], wordPair, selectedLanguage2));
+        lang2WordEl.addEventListener('click', async () => toggleDefinition(filteredWords[i][1], wordPair, selectedLanguage2,category));
 
 
         // Sound icons for pronunciation
@@ -117,9 +119,10 @@ function displayWords(words) {
 }
 
 
-async function toggleDefinition(word, wordPair, language) {
+async function toggleDefinition(word, wordPair, language, category) {
     // Vérifie si la définition existe déjà
     let definitionEl = wordPair.querySelector('.definition');
+    //const categoryEl = document.getElementById('category');
 
     if (definitionEl) {
         // Toggle l'affichage avec une animation de slide-up/down
@@ -138,7 +141,7 @@ async function toggleDefinition(word, wordPair, language) {
         definitionEl.classList.add('definition');
 
         // Récupérer la définition via la fonction Netlify
-        const definition = await getDefinition(word[language], language);
+        const definition = await getDefinition(word[language], language, category);
 
 
         // Image
@@ -149,7 +152,10 @@ async function toggleDefinition(word, wordPair, language) {
         // Texte
         const textElement = document.createElement('div');
         //textElement.textContent = `Définition et exemple en ${language}: Exsistit autem hoc loco quaedam quaestio subdifficilis...`;
-        textElement.textContent = definition;
+        //textElement.textContent = definition;
+        console.log(typeof marked);  // Cela doit afficher "function" si `marked` est correctement chargé
+
+        textElement.innerHTML = marked.parse(definition); // Utilisation de `marked` pour le Markdown
 
         // Ajoute l'image et le texte à l'élément de définition
         definitionEl.appendChild(imgElement);
@@ -210,7 +216,7 @@ categoryEl.addEventListener('change', function(){
 //ajout des mots personnalisés:
 
 // Simulation de l'appel API pour obtenir les traductions dans les autres langues
-async function getTranslations(word, lang) {
+async function getTranslations(word, lang, category) {
     // Use a netlify function to get the definition from the API
 
     try {
@@ -221,7 +227,8 @@ async function getTranslations(word, lang) {
             },
             body: JSON.stringify({
                 word,
-                lang
+                lang,
+                category,
             })
         });
 
@@ -284,7 +291,7 @@ async function addWord() {
 
 // Add event
 
-async function getDefinition(word, language) {
+async function getDefinition(word, language, category) {
     // Use a netlify function to get the definition from the API
 
     try {
@@ -295,7 +302,8 @@ async function getDefinition(word, language) {
             },
             body: JSON.stringify({
                 word,
-                targetLanguage: language
+                targetLanguage: language,
+                category,
             })
         });
 
