@@ -163,7 +163,7 @@ categoryEl.addEventListener('change', function(){
     }, 20000); // Garder l'indice visible pendant 5 secondes
 });
 
-async function getHint(word, language) {
+async function getHint(word, language, category) {
     // Use a netlify function to get the definition from the API
 
     try {
@@ -174,7 +174,8 @@ async function getHint(word, language) {
             },
             body: JSON.stringify({
                 word,
-                targetLanguage: language
+                targetLanguage: language,
+                category : categoryEl.value,
             })
         });
 

@@ -1,7 +1,7 @@
 import fetch from 'node-fetch';
 
 exports.handler = async function (event, context) {
-    const { word, targetLanguage } = JSON.parse(event.body);
+    const { word, targetLanguage, category } = JSON.parse(event.body);
 
     if (!word || !targetLanguage) {
         return {
@@ -22,8 +22,11 @@ exports.handler = async function (event, context) {
             body: JSON.stringify({
                 model: "gpt-4o-mini",
                 messages: [
-                    { role: "system", content: "You are a flashcard game." },
-                    { role: "user", content: `Give me one hint for this word : ${word} in the following language ${targetLanguage}, do not forget that I am playing a flashcard game` }
+                    { role: "system", content: "You are a flashcard game assistant designed to help players guess words by providing hints. " +
+                            "Your goal is to provide helpful and challenging hints, without revealing the answer directly." },
+
+                    { role: "user", content: `Provide a single, clever hint to help me guess the word "${word}" which belongs to the category "${category}". 
+                    The hint should be exclusively in the "${targetLanguage}" language. Do not include the original word, and make sure the hint is relevant but not too obvious.` }
                 ],
                 max_tokens: 200
             })
