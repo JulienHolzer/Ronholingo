@@ -152,7 +152,7 @@ categoryEl.addEventListener('change', function(){
     const targetLanguage = targetLanguageSelect.value;
 
     // Mettre à jour le texte d'indice
-    hintText.textContent = await getHint(currentWord[sourceLanguage], targetLanguage);
+    hintText.textContent = await getHint(currentWord[sourceLanguage], targetLanguage, selectedCategory , sourceLanguage);
 
     // Ajouter la classe pour l'animation
     hintText.classList.add('show');
@@ -163,7 +163,7 @@ categoryEl.addEventListener('change', function(){
     }, 20000); // Garder l'indice visible pendant 20 secondes
 });
 
-async function getHint(word, language, category) {
+async function getHint(word, language, category, sourceLanguage) {
     // Use a netlify function to get the definition from the API
 
     try {
@@ -175,6 +175,7 @@ async function getHint(word, language, category) {
             body: JSON.stringify({
                 word,
                 targetLanguage: language,
+                sourceLanguage,
                 category : categoryEl.value,
             })
         });
