@@ -2,21 +2,22 @@
     height: auto;
     display: flex;
     flex-direction: column;
-    margin : 50px;
+    margin : 0 50px;
     justify-content: space-around;
 }
 .features-text{
     width: 500px;
-    margin: 20px;
+    margin: 20px 10px;
 }
 
-#features-1, #features-2, #features-3{
+#features-1, #features-2, #features-3, #features-4, #features-5, #features-6{
     display: flex;
-    margin: 50px 0;
+    margin: 100px 0;
+    align-items: center;
 }
 
 
-#features-2 {
+#features-2, #features-4, #features-6{
     justify-content: end;
 }
 #features-1-img{
@@ -24,7 +25,7 @@
     margin: 0 50px;
 }
 
-#features-2-img, #features-3-img{
+#features-2-img, #features-3-img, #features-4-img, #features-5-img, #features-6-img{
     width: 500px;
     border: #03045e solid 5px;
     border-radius: 30px;
@@ -51,4 +52,8 @@
 #footer-contact-presentation{
     font-size: 20px;
     margin: 20px 0;
+}
+
+body {
+    font-size: 20px;
 }
