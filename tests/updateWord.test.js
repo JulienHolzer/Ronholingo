@@ -2,12 +2,9 @@
 
 // Importations des fonctions Firebase pas directement utilisées dans le fichier car cela bug à cause des import CDN
 const { initializeApp } = require("@firebase/app");
-const { getDatabase, ref, get, set, push, update, remove } = require("@firebase/database");
+const { getDatabase, ref, get } = require("@firebase/database");
 
-const {addWordsToDatabase} = require('../src/scripts/main.js')
 const {updateWordInDatabase} = require('../src/scripts/main.js')
-const {deleteWordFromDatabase} = require('../src/scripts/main.js')
-const {readWordFromDatabase} = require('../src/scripts/main.js')
 
 
 
