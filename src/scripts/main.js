@@ -1,7 +1,7 @@
 //this file is a test for now !!!!!
 // how to use firebase with js
 import { wordsRef, database } from "./firebase-config.js";
-import {ref, get, set, push} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js"
+import {ref, get, set, push, update, remove} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js"
 
 
 /*
@@ -20,7 +20,7 @@ let wordsList = [];
 
 
 // Words-list initialization:
-function addWordsToDatabase(english, french, spanish, vietnamese, japanese, german, italian, imgURL, category) {
+export function addWordsToDatabase(english, french, spanish, vietnamese, japanese, german, italian, imgURL, category) {
 
     const newWordRef = push(wordsRef);
     //wordsID.push(newWordRef); // no need for this
@@ -35,6 +35,26 @@ function addWordsToDatabase(english, french, spanish, vietnamese, japanese, germ
         imgURL: imgURL,
         category: category
     })
+    return newWordRef;
+}
+
+// Fonction pour mettre à jour un mot
+export async function updateWordInDatabase(wordID, updatedData) {
+    const wordRef = ref(database, `words/${wordID}`);
+    await update(wordRef, updatedData);
+}
+
+// Fonction pour supprimer un mot
+export async function deleteWordFromDatabase(wordID) {
+    const wordRef = ref(database, `words/${wordID}`);
+    await remove(wordRef);
+}
+
+// Fonction pour lire un mot
+export async function readWordFromDatabase(wordID) {
+    const wordRef = ref(database, `words/${wordID}`);
+    const snapshot = await get(wordRef);
+    return snapshot.exists() ? snapshot.val() : null;
 }
 
 
