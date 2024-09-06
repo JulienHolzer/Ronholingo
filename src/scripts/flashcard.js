@@ -1,6 +1,5 @@
 import {wordsRef} from "./firebase-config.js";
 import {onValue} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js"
-//import fetch from "node-fetch";
 
 
 // HTML elements
@@ -56,11 +55,6 @@ function updateFlashcard(words) {
         if (sourceLanguage === targetLanguage) {
             backText.textContent = "Please select different languages.";
         } else {
-            /*
-            // Set the front text as the word in the source language and the back text as the target language's translation
-            frontText.textContent = currentWord[sourceLanguage];
-            backText.textContent = currentWord[targetLanguage];
-*/
 
             // Désactiver les transitions temporairement
             flashcard.style.transition = 'none';

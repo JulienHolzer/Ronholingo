@@ -1,5 +1,5 @@
 import { database } from "./firebase-config.js";
-import {ref, get, set, push, onValue, remove} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js"
+import {ref, onValue} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js"
 
 const wordsInDB = ref(database, "words")
 
@@ -75,8 +75,6 @@ function createBoard() {
     const cardsArray = [];
 
     selectedPairs.forEach(word => {
-        //cardsArray.push({ text: word[1][selectedLanguage1], id: word[selectedLanguage1] });
-        //cardsArray.push({ text: word[1][selectedLanguage2], id: word[selectedLanguage1] });
         cardsArray.push({ text: word[1][selectedLanguage1], id: word[0] });
         cardsArray.push({ text: word[1][selectedLanguage2], id: word[0] });
     });
