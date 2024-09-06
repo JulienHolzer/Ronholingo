@@ -11,7 +11,6 @@ document.getElementById('translateButton').addEventListener('click', async () =>
 
     try {
         const response = await fetch('/.netlify/functions/translate', {
-            //const response = await fetch('/.Ronholingo/functions/translate', {
 
             method: 'POST',
             headers: {

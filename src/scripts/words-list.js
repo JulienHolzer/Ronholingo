@@ -1,7 +1,6 @@
 import {wordsRef } from "./firebase-config.js";
 import {onValue} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js"
 import {addWordsToDatabaseWithCheck} from "./main.js";
-//import { marked } from 'marked';  // Importer la fonction `marked` pour convertir le Markdown en HTML
 
 
 // Languages selected by default
@@ -107,7 +106,7 @@ async function displayWords(words) {
         soundIcon2.src = '../images/sound-icon.png';  // Path to your sound icon image
         soundIcon2.classList.add('sound-icon');
         soundIcon2.addEventListener('click', function(){speak(lang2Word, selectedLanguage2);
-            console.log("yay")})
+        });
 
         lang1WordEl.appendChild(soundIcon1);
         lang2WordEl.appendChild(soundIcon2);
@@ -122,7 +121,6 @@ async function displayWords(words) {
 async function toggleDefinition(word, wordPair, language, category) {
     // Vérifie si la définition existe déjà
     let definitionEl = wordPair.querySelector('.definition');
-    //const categoryEl = document.getElementById('category');
 
     if (definitionEl) {
         // Toggle l'affichage avec une animation de slide-up/down
@@ -151,9 +149,6 @@ async function toggleDefinition(word, wordPair, language, category) {
 
         // Texte
         const textElement = document.createElement('div');
-        //textElement.textContent = `Définition et exemple en ${language}: Exsistit autem hoc loco quaedam quaestio subdifficilis...`;
-        //textElement.textContent = definition;
-        console.log(typeof marked);  // Cela doit afficher "function" si `marked` est correctement chargé
 
         textElement.innerHTML = marked.parse(definition); // Utilisation de `marked` pour le Markdown
 
@@ -186,8 +181,6 @@ function addSoundIconEventListeners() {
 }
 
 
-
-
 // Listen for changes in the selected languages
 language1El.addEventListener('change', function(){
     selectedLanguage1 = language1El.value;
@@ -213,9 +206,7 @@ categoryEl.addEventListener('change', function(){
 });
 
 
-//ajout des mots personnalisés:
 
-// Simulation de l'appel API pour obtenir les traductions dans les autres langues
 async function getTranslations(word, lang, category) {
     // Use a netlify function to get the definition from the API
 

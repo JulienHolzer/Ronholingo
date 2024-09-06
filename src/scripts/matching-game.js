@@ -1,5 +1,5 @@
 import { database } from "./firebase-config.js";
-import {ref, get, set, push, onValue, remove} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js"
+import {ref, onValue} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js"
 
 const wordsInDB = ref(database, "words")
 
@@ -61,7 +61,6 @@ function showNewWord() {
     // Sélectionner un mot aléatoire
     const randomIndex = Math.floor(Math.random() * filteredWords.length);
     currentWord = filteredWords[randomIndex];
-    //wordElement.textContent = currentWord[1][currentLanguage];
 
 
     // Mélanger les images
@@ -77,18 +76,6 @@ function showNewWord() {
     // Mélanger à nouveau les options
     options.sort(() => 0.5 - Math.random());
 
-    /*
-    // old version avec les images qui se charge pas en meme temps
-    // Afficher les images
-    imagesContainer.innerHTML = '';
-    options.forEach((word) => {
-        const imgElement = document.createElement('img');
-        imgElement.src = word[1].imgURL;
-        imgElement.alt = word[1][currentLanguage];
-        imgElement.addEventListener('click', () => checkAnswer(word));
-        imagesContainer.appendChild(imgElement);
-    });
-    */
 
     // Créer un fragment pour regrouper les images
     const fragment = document.createDocumentFragment();

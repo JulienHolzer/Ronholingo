@@ -1,7 +1,7 @@
 html, body {
     height: auto;
-    min-height: 100%; /* Assurer que l'écran est au moins rempli */
-    margin: 0; /* Assurez-vous qu'il n'y a pas de marge par défaut */
+    min-height: 100%;
+    margin: 0;
 }
 
 body{
@@ -63,7 +63,7 @@ body{
 
 #main-title{
     font-size: 100px;
-    font-weight: 700; /* Utilisez un poids élevé pour un impact plus fort */
+    font-weight: 700;
     color: #03045e;
 }
 
