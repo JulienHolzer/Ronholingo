@@ -2,7 +2,7 @@
 
 **Ronholingo** est un site web gratuit, interactif et amusant pour l'apprentissage du vocabulaire en anglais, français, espagnol, allemand, italien, japonais et vietnamien.
 
-Le site est déjà déployé sur Netlify. Vous pouvez le visiter via le lien ci-dessous :
+Le site est déployé sur Netlify. Vous pouvez le visiter via le lien ci-dessous :
 
 **Lien vers le site web :** [https://ronholingo.netlify.app/](https://ronholingo.netlify.app/)
 
