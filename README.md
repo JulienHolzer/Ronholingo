@@ -27,3 +27,4 @@ Vous pouvez tester l'application. Si vous souhaitez contribuer et ajouter des fo
 5. **Travailler sur la branche `dev`** et créer une **pull request** vers la branche `main` afin que nous puissions vérifier votre code avant de le fusionner avec la branche principale. Un pipeline est configuré pour déployer automatiquement sur Netlify après chaque push sur `main`.
 6. **Pour exécuter les tests en local**, utilisez la commande `npm test`. Un script est déjà configuré pour exécuter tous les tests.
 7. **Si vous ajoutez des tests**, placez-les dans le dossier `./tests` et nommez les fichiers de la manière suivante : `nomDuFichier.test.js`.
+
