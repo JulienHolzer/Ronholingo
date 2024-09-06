@@ -3,8 +3,10 @@
 // Importations des fonctions Firebase pas directement utilisées dans le fichier car cela bug à cause des import CDN
 const { initializeApp } = require("@firebase/app");
 const { getDatabase, ref, get} = require("@firebase/database");
+const { describe, it, expect, afterAll } = require('@jest/globals');
 
 const {addWordsToDatabase} = require('../src/scripts/main.js')
+const {readWordFromDatabase} = require("../src/scripts/main");
 
 
 
@@ -14,7 +16,7 @@ const appSettings = {
 }
 const app = initializeApp(appSettings);
 const database = getDatabase(app);
-const wordsRef = ref(database, "words")
+
 // ********************************************************************************************************************
 
 // Test: Ajouter un mot à la base de données
@@ -23,23 +25,26 @@ describe("Create word in Firebase", () => {
 
     it("should add a word to the database", async () => {
         const newWordRef = await addWordsToDatabase(
-            "car",
-            "voiture",
-            "coche",
-            "xe ô tô",
-            "車",
-            "Auto",
-            "auto",
-            "https://example.com/car.jpg",
-            "vehicle"
+            "robot",
+            "robot",
+            "robot",
+            "người máy",
+            "ロボット",
+            "Roboter",
+            "robot",
+            "https://img.freepik.com/vecteurs-libre/robot-flottant_78370-3669.jpg",
+            "technology"
         );
         addedWordID = newWordRef.key;
 
         // Vérifier si le mot a été ajouté
         const wordRef = ref(database, `words/${addedWordID}`);
         const snapshot = await get(wordRef);
+
+        const deletedWord = await readWordFromDatabase(addedWordID);
+
         expect(snapshot.exists()).toBe(true);
-        expect(snapshot.val().english).toBe("car");
+        expect(snapshot.val().english).toBe("robot");
     });
 
     // Nettoyer après les tests

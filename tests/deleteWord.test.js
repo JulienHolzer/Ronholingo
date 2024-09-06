@@ -4,8 +4,11 @@
 const { initializeApp } = require("@firebase/app");
 const { getDatabase, ref, get} = require("@firebase/database");
 
-const {updateWordInDatabase} = require('../src/scripts/main.js')
+const {deleteWordFromDatabase} = require('../src/scripts/main.js')
 
+
+const { describe, it, expect, afterAll } = require('@jest/globals');
+const {addWordsToDatabase} = require("../src/scripts/main");
 
 
 // Firebase configuration
@@ -14,27 +17,34 @@ const appSettings = {
 }
 const app = initializeApp(appSettings);
 const database = getDatabase(app);
-const wordsRef = ref(database, "words")
 // ********************************************************************************************************************
 
 
-// Test: Mettre à jour un mot de la base de données
-describe("Update word in Firebase", () => {
-    it("should update a word in the database", async () => {
-        const wordID = "some-valid-word-id"; // Remplacer par un ID valide
-        const updatedData = {
-            english: "updated car",
-            french: "voiture mise à jour"
-        };
 
-        await updateWordInDatabase(wordID, updatedData);
+// Test: Supprimer un mot de la base de données
+describe("Delete word from Firebase", () => {
+    it("should delete a word from the database", async () => {
 
-        // Vérifier la mise à jour
+        const newWordRef = await addWordsToDatabase(
+            "robot",
+            "robot",
+            "robot",
+            "người máy",
+            "ロボット",
+            "Roboter",
+            "robot",
+            "https://img.freepik.com/vecteurs-libre/robot-flottant_78370-3669.jpg",
+            "technology"
+        );
+
+        const wordID = newWordRef.key;
+
+        await deleteWordFromDatabase(wordID);
+
+        // Vérifier si le mot a été supprimé
         const wordRef = ref(database, `words/${wordID}`);
         const snapshot = await get(wordRef);
-
-        expect(snapshot.val().english).toBe("updated car");
-        expect(snapshot.val().french).toBe("voiture mise à jour");
+        expect(snapshot.exists()).toBe(false);
     });
 
     // Nettoyer après les tests

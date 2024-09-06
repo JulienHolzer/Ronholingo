@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-exports.handler = async function (event, context) {
+exports.handler = async function (event) {
     const { word, targetLanguage, category } = JSON.parse(event.body);
 
     if (!word || !targetLanguage) {
@@ -32,11 +32,6 @@ exports.handler = async function (event, context) {
                 max_tokens: 300
             })
         });
-
-        if (!response.ok) {
-            let errorMessage = await response.text();
-            throw new Error(`Error: ${response.status} - ${errorMessage}`);
-        }
 
         const data = await response.json();
         if (!data.choices || data.choices.length === 0) {
