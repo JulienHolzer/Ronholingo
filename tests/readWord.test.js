@@ -2,7 +2,8 @@
 
 // Importations des fonctions Firebase pas directement utilisées dans le fichier car cela bug à cause des import CDN
 const { initializeApp } = require("@firebase/app");
-const { getDatabase, ref} = require("@firebase/database");
+const { getDatabase} = require("@firebase/database");
+const { describe, it, expect, afterAll } = require('@jest/globals');
 
 const {addWordsToDatabase} = require('../src/scripts/main.js')
 const {readWordFromDatabase} = require('../src/scripts/main.js')
@@ -15,7 +16,6 @@ const appSettings = {
 }
 const app = initializeApp(appSettings);
 const database = getDatabase(app);
-const wordsRef = ref(database, "words")
 // ********************************************************************************************************************
 
 
@@ -41,7 +41,7 @@ describe("Read word from Firebase", () => {
         const word = await readWordFromDatabase(addedWordID);
 
         expect(word).not.toBeNull();
-        expect(word.english).toBe("robot"); // Remplacer par le mot attendu
+        expect(word.english).toBe("robot");
 
         const deletedWord = await readWordFromDatabase(addedWordID);
     });

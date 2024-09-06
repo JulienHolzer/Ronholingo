@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-exports.handler = async function (event, context) {
+exports.handler = async function (event) {
     const { inputText, targetLanguage } = JSON.parse(event.body);
 
     if (!inputText || !targetLanguage) {
