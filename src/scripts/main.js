@@ -4,20 +4,6 @@ import { wordsRef, database } from "./firebase-config.js";
 import {ref, get, set, push, update, remove} from "https://www.gstatic.com/firebasejs/10.10.0/firebase-database.js"
 
 
-/*
-// Firebase configuration
-const appSettings = {
-    databaseURL: "https://ronholingo-default-rtdb.europe-west1.firebasedatabase.app/"
-}
-
-const app = initializeApp(appSettings)
-const database = getDatabase(app)
-const wordsInDB = ref(database, "words")
-
-let wordsList = [];
-*/
-
-
 
 // Words-list initialization:
 export function addWordsToDatabase(english, french, spanish, vietnamese, japanese, german, italian, imgURL, category) {
@@ -67,7 +53,6 @@ export function addWordsToDatabaseWithCheck(english, french, spanish, vietnamese
         if (snapshot.exists()) {
             console.log("Cet identifiant (" + english +") existe déjà !");
         } else {
-
 
             // Ajoute les données si l'identifiant n'existe pas encore
             set(wordRef, {
